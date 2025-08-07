@@ -8,11 +8,12 @@
             <form string="Sale Feedback">
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="sale_order_id"/>
-                        <field name="rating"/>
-                        <field name="comment"/>
-                        <field name="feedback_date"/>
+                        <field name="name" readonly="1"/>
+                        <field name="sale_order_id" readonly="1"/>
+                        <field name="rating" readonly="1"/>
+                        <field name="comment" readonly="1"/>
+                        <field name="feedback_date" readonly="1"/>
+                        <field name="sale_order_id" widget="many2one_avatar_user" readonly="1"/>
                     </group>
                 </sheet>
             </form>
@@ -23,7 +24,7 @@
         <field name="name">sale.feedback.tree</field>
         <field name="model">sale.feedback</field>
         <field name="arch" type="xml">
-            <list string="Sale Feedbacks">
+            <list string="Sale Feedbacks" create="False" default_order="feedback_date desc">
                 <field name="name"/>
                 <field name="sale_order_id"/>
                 <field name="rating"/>
@@ -47,9 +48,43 @@
         </field>
     </record>
 
+    <!-- <record id="view_sale_order_form_inherit_feedback" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.feedback</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='other_information']" position="inside">
+                <field name="feedback_ids" readonly="1">
+                    <list string="Feedbacks" default_order="feedback_date desc">
+                        <field name="rating"/>
+                        <field name="feedback_date"/>
+                    </list>
+                </field>
+            </xpath>
+        </field>
+    </record> -->
+
+    <record id="view_res_user_form_inherit_feedback" model="ir.ui.view">
+        <field name="name">res.users.form.inherit.feedback</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_simple_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='mobile']" position="after">
+                <field name="average_rating" readonly="1"/>
+                <field name="feedback_ids" readonly="1" >
+                    <list string="Feedbacks" default_order="feedback_date desc">
+                        <field name="rating"/>
+                        <field name="feedback_date"/>
+                    </list>
+                </field>
+            </xpath>
+        </field>
+    </record>
+
     <menuitem id="sale_order_feedbacks_menu"
         name="Sale Order Feedbacks"
         action="action_sale_feedback"
         parent="sale.menu_sale_report"
         sequence="999"/>
+
 </odoo>
