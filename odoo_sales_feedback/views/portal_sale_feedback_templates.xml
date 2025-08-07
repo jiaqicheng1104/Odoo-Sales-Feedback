@@ -2,39 +2,55 @@
 <odoo>
     <template id="sale_order_portal_content_feedback_inherit" inherit_id="sale.sale_order_portal_template">
         <xpath expr="//div[contains(@t-if,'user_id')]" position="after">
-            <div class="position-relative flex-grow-1 ">
-                <h6>
-                    <small class="text-muted mb-3">
-                        Leave a review
-                    </small>
-                </h6>
-                <form t-attf-action="/my/orders/{{ sale_order.id }}/submit_feedback" method="post">
-                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                    
-                    <div class="form-group mb-3">
-                        <label for="rating" class="form-label">Rating</label>
-                        <select class="form-select" name="rating" required="True">
-                            <option value="">Select a rating</option>
-                            <t t-foreach="[1,2,3,4,5]" t-as="star" t-key="star">
-                                <option t-att-value="str(star)">
-                                    <t t-esc="star"/> <t t-esc="'⭐' * star"/>
-                                </option>
-                            </t>
-                        </select>
+            <div t-if="sale_order.feedback_ids" class="o_portal_sidebar_section mt-4">
+                <h6 class="text-muted">Feedback</h6>
+                <t t-foreach="sale_order.feedback_ids" t-as="feedback" t-key="feedback.id">
+                    <div class="mb-3">
+                        <p class="mb-1">
+                            <strong>Rating:</strong> <t t-esc="feedback.rating"/> ★
+                        </p>
+                        <p class="mb-1">
+                            <strong>Comment:</strong> <t t-esc="feedback.comment"/>
+                        </p>
+                        <p class="mb-0 text-muted small">
+                            <strong>Date:</strong>
+                            <t t-esc="feedback.feedback_date.strftime('%Y-%m-%d') if feedback.feedback_date else ''"/>
+                        </p>
                     </div>
-
-                    <div class="form-group mb-3">
-                        <textarea name="comment" 
-                            class="form-control flex-grow-1" 
-                            rows="4" 
-                            placeholder="Write something..."
-                            required="True">TEST</textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary btn-sm">Submit Feedback</button>
-                </form>
-
+                </t>
             </div>
+
+            <t t-if="not sale_order.feedback_ids">
+                <div class="position-relative flex-grow-1 ">
+                    <h6>
+                        <small class="text-muted mb-3">
+                            Leave a review
+                        </small>
+                    </h6>
+                    <form t-attf-action="/my/orders/{{ sale_order.id }}/submit_feedback" method="post">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <div class="form-group mb-3">
+                            <label for="rating" class="form-label">Rating</label>
+                            <select class="form-select" name="rating" required="True">
+                                <option value="">Select a rating</option>
+                                <t t-foreach="[1,2,3,4,5]" t-as="star" t-key="star">
+                                    <option t-att-value="str(star)">
+                                        <t t-esc="star"/> <t t-esc="'⭐' * star"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <textarea name="comment" 
+                                class="form-control flex-grow-1" 
+                                rows="4" 
+                                placeholder="Write something..."
+                                required="True">TEST</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm">Submit Feedback</button>
+                    </form>
+                </div>
+            </t>
         </xpath>
     </template>
 </odoo>
