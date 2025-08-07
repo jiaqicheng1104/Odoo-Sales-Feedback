@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="view_sale_feedback_form" model="ir.ui.view">
         <field name="name">sale.feedback.form</field>

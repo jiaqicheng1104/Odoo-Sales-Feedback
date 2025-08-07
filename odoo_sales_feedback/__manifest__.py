@@ -26,9 +26,12 @@ Use this module to track customer satisfaction, reduce churn, and empower your s
     'depends': [
         'website_sale',
         'sale_management',
+        'portal',
+        'mail',
     ],
     'data': [
         'security/ir.model.access.csv',
         'views/sale_feedback_views.xml',
+        'views/portal_sale_feedback_templates.xml',
     ],
 }
