@@ -64,6 +64,30 @@
         </field>
     </record> -->
 
+    <record id="view_res_user_feedback_graph" model="ir.ui.view">
+        <field name="name">res.users.feedback.graph</field>
+        <field name="model">res.users</field>
+        <field name="arch" type="xml">
+            <graph string="Average Feedback by Salesperson" type="bar">
+            <field name="name" type="row"/> 
+            <field name="average_rating" type="measure" operator="avg"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_res_user_feedback_graph" model="ir.actions.act_window">
+        <field name="name">Average Feedback Ratings</field>
+        <field name="res_model">res.users</field>
+        <field name="view_mode">graph,list</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Analyze average feedback ratings by salesperson
+            </p>
+        </field>
+    </record>
+
+
     <record id="view_res_user_form_inherit_feedback" model="ir.ui.view">
         <field name="name">res.users.form.inherit.feedback</field>
         <field name="model">res.users</field>
@@ -82,9 +106,15 @@
     </record>
 
     <menuitem id="sale_order_feedbacks_menu"
-        name="Sale Order Feedbacks"
-        action="action_sale_feedback"
-        parent="sale.menu_sale_report"
-        sequence="999"/>
+            name="Sale Order Feedbacks"
+            action="action_sale_feedback"
+            parent="sale.menu_sale_report"
+            sequence="999"/>
+
+    <menuitem id="menu_res_users_feedback_graph"
+            name="Average Feedback Ratings"
+            parent="sale.menu_sale_report"
+            action="action_res_user_feedback_graph"
+            sequence="888"/>
 
 </odoo>
