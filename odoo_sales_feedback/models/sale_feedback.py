@@ -17,9 +17,3 @@ class SaleFeedback(models.Model):
     ], string='Rating', required=True)
     comment = fields.Text(string='Comment')
     feedback_date = fields.Datetime(string='Feedback Date', default=fields.Datetime.now)
-
-    # @api.model_create_multi
-    # def create(self, vals):
-    #     for record in vals:
-    #         record['name'] = record.get('name', 'Feedback for Sale Order %s' % record.get('sale_order_id'))
-    #     return super(SaleFeedback, self).create(vals)

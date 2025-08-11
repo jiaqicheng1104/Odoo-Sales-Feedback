@@ -48,22 +48,6 @@
         </field>
     </record>
 
-    <!-- <record id="view_sale_order_form_inherit_feedback" model="ir.ui.view">
-        <field name="name">sale.order.form.inherit.feedback</field>
-        <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//page[@name='other_information']" position="inside">
-                <field name="feedback_ids" readonly="1">
-                    <list string="Feedbacks" default_order="feedback_date desc">
-                        <field name="rating"/>
-                        <field name="feedback_date"/>
-                    </list>
-                </field>
-            </xpath>
-        </field>
-    </record> -->
-
     <record id="view_res_user_feedback_graph" model="ir.ui.view">
         <field name="name">res.users.feedback.graph</field>
         <field name="model">res.users</field>
@@ -86,7 +70,6 @@
             </p>
         </field>
     </record>
-
 
     <record id="view_res_user_form_inherit_feedback" model="ir.ui.view">
         <field name="name">res.users.form.inherit.feedback</field>
@@ -116,5 +99,4 @@
             parent="sale.menu_sale_report"
             action="action_res_user_feedback_graph"
             sequence="888"/>
-
 </odoo>

@@ -5,8 +5,8 @@ from odoo.http import request
 
 from odoo.addons.sale.controllers.portal import CustomerPortal
 
-class PortalSalesFeedback(CustomerPortal):
 
+class PortalSalesFeedback(CustomerPortal):
 
     @http.route(['/my/orders/<int:order_id>/submit_feedback'], type='http', auth="user", website=True, methods=['POST'], csrf=True)
     def portal_feedback_submit(self, order_id, **post):

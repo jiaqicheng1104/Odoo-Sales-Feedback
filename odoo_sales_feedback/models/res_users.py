@@ -15,4 +15,3 @@ class ResUsers(models.Model):
                 user.average_rating = sum(int(r) for r in ratings) / len(ratings)
             else:
                 user.average_rating = 0.0
-
